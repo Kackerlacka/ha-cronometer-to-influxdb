@@ -1,0 +1,24 @@
+{
+  "name": "Cronometer Importer",
+  "version": "1.0",
+  "slug": "cronometer_importer",
+  "description": "InfluxDB v1 Importer for Cronometer Biometrics and Daily Nutrition data.",
+  "startup": "before",
+  "boot": "auto",
+  "hassio_api": true,
+  "hassio_role": "default",
+  "homeassistant_api": false,
+  "arch": ["aarch64", "amd64", "armhf", "armv7", "i386"],
+  "options": {
+    "cronometer_username": "!secret cronometer_username",
+    "cronometer_password": "!secret cronometer_password",
+    "influxdb_username": "!secret influxdb_username",
+    "influxdb_password": "!secret influxdb_password"
+  },
+  "schema": {
+    "cronometer_username": "str",
+    "cronometer_password": "str",
+    "influxdb_username": "str",
+    "influxdb_password": "str"
+  }
+}
