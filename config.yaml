@@ -18,8 +18,12 @@ options:
   cronometer_password: "!secret cronometer_password"
   influxdb_username: "!secret influxdb_username"
   influxdb_password: "!secret influxdb_password"
+  influxdb_database: "!secret influxdb_database"
+  influxdb_url: "!secret influxdb_url"
 schema:
   cronometer_username: "str"
   cronometer_password: "str"
   influxdb_username: "str"
   influxdb_password: "str"
+  influxdb_database: "str"
+  influxdb_url: "str"
