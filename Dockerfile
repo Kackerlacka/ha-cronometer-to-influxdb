@@ -28,10 +28,8 @@ COPY --from=builder /app/go-app .
 # Install dcron
 RUN apk add --no-cache dcron
 
-# Copy the entrypoint script
-COPY run.sh .
-
-# Set executable permissions on run.sh
+# Copy the entrypoint script and set executable permissions
+COPY run.sh /root/
 RUN chmod +x /root/run.sh
 
 # Command to run the entrypoint script
