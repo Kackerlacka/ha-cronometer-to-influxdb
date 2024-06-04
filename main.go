@@ -17,15 +17,15 @@ import (
 
 func main() {
 	// Set up InfluxDB client
-	influxURL := os.Getenv("INFLUXDB_URL")
-	influxUsername := os.Getenv("INFLUXDB_USERNAME")
-	influxPassword := os.Getenv("INFLUXDB_PASSWORD")
-	influxDatabase := os.Getenv("INFLUXDB_DATABASE")
+	influxdbURL := os.Getenv("INFLUXDB_URL")
+	influxdbUsername := os.Getenv("INFLUXDB_USERNAME")
+	influxdbPassword := os.Getenv("INFLUXDB_PASSWORD")
+	influxdbDatabase := os.Getenv("INFLUXDB_DATABASE")
 
 	influxClient, err := client.NewHTTPClient(client.HTTPConfig{
-		Addr:     influxURL,
-		influxUsername: influxUsername,
-		influxPassword: influxPassword,
+		Addr:     influxdbURL,
+		Username: influxdbUsername,
+		Password: influxdbPassword,
 	})
 	if err != nil {
 		fmt.Printf("failed to create InfluxDB client: %s\n", err)
@@ -39,7 +39,7 @@ func main() {
     endDate := time.Now()
 
     // Delete data within the specified time range
-    err = deleteDataInRange(influxClient, influxDatabase, startDate, endDate)
+    err = deleteDataInRange(influxClient, influxdbDatabase, startDate, endDate)
     if err != nil {
         fmt.Printf("failed to delete data: %s\n", err)
         return
@@ -88,7 +88,7 @@ func main() {
 	}
 
 	// Write biometrics data to InfluxDB
-	err = writeDataToInfluxDB(influxClient, influxDatabase, formattedBiometricsData)
+	err = writeDataToInfluxDB(influxClient, influxdbDatabase, formattedBiometricsData)
 	if err != nil {
 		fmt.Printf("failed to write data to InfluxDB: %s\n", err)
 		return
@@ -123,7 +123,7 @@ func main() {
 	}
 
 	// Write daily nutrition data to InfluxDB
-	err = writeDataToInfluxDB(influxClient, influxDatabase, formattedNutritionData)
+	err = writeDataToInfluxDB(influxClient, influxdbDatabase, formattedNutritionData)
 	if err != nil {
 		fmt.Printf("failed to write data to InfluxDB: %s\n", err)
 		return
@@ -293,9 +293,9 @@ func getFinalMetric(metric string) string {
 	return trimmed
 }
  
-func writeDataToInfluxDB(influxClient client.Client, influxDatabase string, points []*client.Point) error {
+func writeDataToInfluxDB(influxClient client.Client, influxdbDatabase string, points []*client.Point) error {
 	bp, err := client.NewBatchPoints(client.BatchPointsConfig{
-		influxDatabase:  influxDatabase,
+		Database:  influxdbDatabase,
 		Precision: "s",
 	})
 	if err != nil {
@@ -311,12 +311,12 @@ func writeDataToInfluxDB(influxClient client.Client, influxDatabase string, poin
 	return nil
 }
 
-func deleteDataInRange(influxClient client.Client, influxDatabase string, startTime, endTime time.Time) error {
+func deleteDataInRange(influxClient client.Client, influxdbDatabase string, startTime, endTime time.Time) error {
     // Construct the InfluxDB query to delete data within the specified time range
     query := fmt.Sprintf("DELETE FROM /./ WHERE time >= '%s' AND time <= '%s'", startTime.Format(time.RFC3339), endTime.Format(time.RFC3339))
     
     // Create the query object
-    q := client.NewQuery(query, influxDatabase, "")
+    q := client.NewQuery(query, influxdbDatabase, "")
     
     // Execute the query
     response, err := influxClient.Query(q)
