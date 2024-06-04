@@ -1,7 +1,7 @@
 {
-  "name": "Cronometer Importer",
+  "name": "HA Cronometer to InfluxDB Importer",
   "version": "1.0",
-  "slug": "cronometer_importer",
+  "slug": "ha-cronometer-to-influxdb",
   "description": "InfluxDB v1 Importer for Cronometer Biometrics and Daily Nutrition data.",
   "startup": "before",
   "boot": "auto",
