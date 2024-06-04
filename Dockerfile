@@ -30,7 +30,7 @@ RUN apk add --no-cache dcron
 
 # Copy the entrypoint script and set executable permissions
 COPY run.sh /root/
-RUN chmod +x /root/run.sh
+RUN chmod +x run.sh
 
 # Command to run the entrypoint script
 CMD ["./run.sh"]
