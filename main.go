@@ -17,10 +17,10 @@ import (
 
 func main() {
 	// Set up InfluxDB client
-	influxURL := os.Getenv("INFLUX_URL")
-	influxUsername := os.Getenv("INFLUX_USERNAME")
-	influxPassword := os.Getenv("INFLUX_PASSWORD")
-	influxDatabase := os.Getenv("INFLUX_DATABASE")
+	influxURL := os.Getenv("INFLUXDB_URL")
+	influxUsername := os.Getenv("INFLUXDB_USERNAME")
+	influxPassword := os.Getenv("INFLUXDB_PASSWORD")
+	influxDatabase := os.Getenv("INFLUXDB_DATABASE")
 
 	influxClient, err := client.NewHTTPClient(client.HTTPConfig{
 		Addr:     influxURL,
