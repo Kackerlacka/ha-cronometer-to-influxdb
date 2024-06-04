@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Start the cron service
-service cron start
+# Start the dcron service
+crond
 
 # Get the environment variables
 CRONOMETER_USERNAME=$CRONOMETER_USERNAME
