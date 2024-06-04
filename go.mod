@@ -1,4 +1,4 @@
-module example.com/my-go-project
+module github.com/Kackerlacka/ha-cronometer-to-influxdb
 
 go 1.21.4
 
