@@ -25,8 +25,8 @@ WORKDIR /root/
 # Copy the Pre-built binary file from the previous stage
 COPY --from=builder /app/go-app .
 
-# Install cron
-RUN apk add --no-cache cron
+# Install dcron (lightweight cron implementation)
+RUN apk add --no-cache dcron
 
 # Copy the entrypoint script
 COPY run.sh .
