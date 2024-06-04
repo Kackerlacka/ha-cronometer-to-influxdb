@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Start the cron service
+service cron start
+
 # Get the environment variables
 CRONOMETER_USERNAME=${CRONOMETER_USERNAME}
 CRONOMETER_PASSWORD=${CRONOMETER_PASSWORD}
