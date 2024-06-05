@@ -37,6 +37,7 @@ COPY run.sh /root/
 
 # Set executable permissions for the entrypoint script
 RUN chmod +x /root/run.sh
+RUN chmod +x /root/cronapp
 
 # Run your Go application
-CMD ["/root/run.sh"]
+CMD ["./run.sh"]
