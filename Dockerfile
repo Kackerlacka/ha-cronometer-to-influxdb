@@ -14,7 +14,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-RUN go build -o go-app .
+RUN go build -o /root/cronapp .
 
 # Stage 2: Create the final image
 FROM alpine:latest
@@ -22,17 +22,21 @@ FROM alpine:latest
 # Set the Current Working Directory inside the container
 WORKDIR /root/
 
+# Install glibc on Alpine
+RUN apk --no-cache add ca-certificates wget && \
+    wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
+    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r0/glibc-2.35-r0.apk && \
+    apk add --force glibc-2.35-r0.apk && \
+    rm glibc-2.35-r0.apk
+
 # Copy the Pre-built binary file from the previous stage
-COPY --from=builder /app/go-app .
+COPY --from=builder /root/cronapp /root/cronapp
 
-# Install dcron
-RUN apk add --no-cache dcron
+# Copy the entrypoint script
+COPY run.sh /root/
 
-# Copy the entrypoint script and set executable permissions
-COPY run.sh .
+# Set executable permissions for the entrypoint script
+RUN chmod +x /root/run.sh
 
-# Set executable permissions
-RUN chmod +x run.sh
-
-# Command to run the entrypoint script
-CMD ["./run.sh"]
+# Run your Go application
+CMD ["/root/run.sh"]
