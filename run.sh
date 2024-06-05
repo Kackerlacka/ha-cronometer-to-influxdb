@@ -1,3 +1,8 @@
+#!/bin/sh
+
+# Start the dcron service
+crond
+
 # List the contents of the directory
 ls -l
 
