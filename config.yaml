@@ -1,7 +1,7 @@
 name: "HA Cronometer to InfluxDB Importer"
 version: "1.0"
 slug: "ha-cronometer-to-influxdb"
-description: "InfluxDB v1 Importer for Cronometer Biometrics and Daily Nutrition data."
+description: "InfluxDB v1 Importer for Cronometer Biometrics and Daily Nutrition data"
 startup: "before"
 boot: "auto"
 hassio_api: true
@@ -14,12 +14,12 @@ arch:
   - "armv7"
   - "i386"
 options:
-  cronometer_username: "!secret cronometer_username"
-  cronometer_password: "!secret cronometer_password"
-  influxdb_username: "!secret influxdb_username"
-  influxdb_password: "!secret influxdb_password"
-  influxdb_database: "!secret influxdb_database"
-  influxdb_url: "!secret influxdb_url"
+  cronometer_username: !secret cronometer_username
+  cronometer_password: !secret cronometer_password
+  influxdb_username: !secret influxdb_username
+  influxdb_password: !secret influxdb_password
+  influxdb_database: !secret influxdb_database
+  influxdb_url: !secret influxdb_url
 schema:
   cronometer_username: "str"
   cronometer_password: "str"
